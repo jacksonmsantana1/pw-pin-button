@@ -10,15 +10,16 @@ module.exports = function karmaConfig(config) {
     ],
 
     files: [
-      'tests/index.js',
+      'tests/pw-pin-button.spec.js',
     ],
 
     preprocessors: {
-      'tests/index.js': ['webpack'],
+      'tests/pw-pin-button.spec.js': ['webpack'],
     },
 
     browsers: [
-      'PhantomJS',
+      //'PhantomJS',
+      'Chrome',
     ],
 
     singleRun: true,
@@ -28,7 +29,7 @@ module.exports = function karmaConfig(config) {
 
     // Hide webpack build information from output
     webpackMiddleware: {
-      noInfo: true,
+      noInfo: false,
     },
 
     plugins: [
@@ -38,7 +39,8 @@ module.exports = function karmaConfig(config) {
       require('karma-sinon-chai'),
       require('karma-webpack'),
       require('karma-nyan-reporter'),
-      require('karma-phantomjs-launcher'),
+      //require('karma-phantomjs-launcher'),
+      require('karma-chrome-launcher'),
     ],
 
   });

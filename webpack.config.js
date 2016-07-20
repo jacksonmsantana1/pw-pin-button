@@ -13,11 +13,11 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
   ],
   config: {
     devtool: 'eval-source-map',
-  }, 
+  },
   devServer: {
     contentBase: 'public',
   },

@@ -32,11 +32,10 @@ const setInnerHTML = curry((strHtml, elem) => {
   elem.innerHTML = strHtml;
 });
 
-// setAttr :: HTMLElement -> String -> String -> _
+// setAttr :: HTMLElement -> String -> String -> HTMLElement
 const setAttr = curry((obj, attr, val) => {
-  const clone = Object.assign({}, obj);
-  clone[attr] = val;
-  return clone;
+  obj[attr] = val;
+  return obj;
 });
 
 /*****************************Getters********************************/
@@ -110,8 +109,8 @@ HTMLFunctional.getShadowRoot = HTMLFunctional.prototype.getShadowRoot;
 HTMLFunctional.prototype.getChildNodes = getChildNodes;
 HTMLFunctional.getChildNodes = HTMLFunctional.prototype.getChildNodes;
 
-HTMLFunctional.prototype.getProjectInfo = getPwProjectInfo;
-HTMLFunctional.getProjectInfo = HTMLFunctional.prototype.getProjectInfo;
+HTMLFunctional.prototype.getPwProjectInfo = getPwProjectInfo;
+HTMLFunctional.getPwProjectInfo = HTMLFunctional.prototype.getPwProjectInfo;
 
 HTMLFunctional.prototype.getPwUserInfo = getPwUserInfo;
 HTMLFunctional.getPwUserInfo = HTMLFunctional.prototype.getPwUserInfo;

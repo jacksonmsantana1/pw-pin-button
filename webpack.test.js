@@ -1,9 +1,10 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   context: path.resolve('tests'),
   entry: {
-    app: './index',
+    app: './pw-pin-button.spec.js',
   },
   output: {
     path: path.resolve('build/tests/'),
