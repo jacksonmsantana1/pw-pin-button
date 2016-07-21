@@ -41,6 +41,20 @@ TypeSafety.prototype.undef = function undef(a) {
 TypeSafety.undef = TypeSafety.prototype.undef;
 
 /**
+ * Number -> Right(Number) | Left(Error)
+ * @param a
+ */
+TypeSafety.prototype.nan = function nan(a) {
+  if (Number.isNaN(a)) {
+    return Either.Left(a);
+  }
+
+  return TypeSafety.NUM(a);
+};
+
+TypeSafety.nan = TypeSafety.prototype.nan;
+
+/**
  * typeOf
  * @param type
  * @returns {Function}
@@ -57,9 +71,29 @@ TypeSafety.prototype.typeOf = function typeOf(type) {
 
 TypeSafety.typeOf = TypeSafety.prototype.typeOf;
 
+/**
+ *
+ * @param type
+ * @returns {typeOFX}
+ */
+TypeSafety.prototype.typeOF = function typeOF(type) {
+  return function typeOFX(x) {
+    if (typeof x === type) {
+      return Either.Right(x);
+    }
+
+    return Either.Left(`Error: ${type} expected, ${typeof x} given.`);
+  };
+};
+TypeSafety.typeOF = TypeSafety.prototype.typeOF;
+
 // Types
 TypeSafety.str = TypeSafety.typeOf('string');
+TypeSafety.STR = TypeSafety.typeOF('string');
+
 TypeSafety.num = TypeSafety.typeOf('number');
+TypeSafety.NUM = TypeSafety.typeOF('number');
+
 TypeSafety.bool = TypeSafety.typeOf('boolean');
 TypeSafety.func = TypeSafety.typeOf('function');
 
@@ -81,7 +115,7 @@ TypeSafety.prototype.objectTypeOf = function objectTypeOf(name) {
 TypeSafety.objectTypeOf = TypeSafety.prototype.objectTypeOf;
 
 /**
- * a -> Either(Array, String)
+ * Array -> Right(Array) | Left(Error)
  * @param arr
  */
 TypeSafety.prototype.arrTypeOf = function arrTypeOf(arr) {
@@ -97,6 +131,32 @@ TypeSafety.prototype.arrTypeOf = function arrTypeOf(arr) {
 };
 
 TypeSafety.arrTypeOf = TypeSafety.prototype.arrTypeOf;
+
+/**
+ * String -> Right(String) | Left(Error)
+ * @type {TypeSafety.arrTypeOf|*}
+ */
+TypeSafety.prototype.strTypeOf = function strTypeOf(str) {
+  return TypeSafety.STR(str)
+    .chain(TypeSafety.nil)
+    .chain(TypeSafety.undef);
+};
+
+TypeSafety.strTypeOf = TypeSafety.prototype.strTypeOf;
+
+/**
+ * Number -> Right(Number) | Left(Error)
+ * @param n
+ * @returns {*}
+ */
+TypeSafety.prototype.numTypeOf = function numTypeOf(n) {
+  return TypeSafety.NUM(n)
+    .chain(TypeSafety.nil)
+    .chain(TypeSafety.undef)
+    .chain(TypeSafety.nan);
+};
+
+TypeSafety.numTypeOf = TypeSafety.prototype.numTypeOf;
 
 //Objects Types
 TypeSafety.obj = TypeSafety.objectTypeOf('Object');
