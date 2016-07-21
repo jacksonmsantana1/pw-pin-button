@@ -1,9 +1,7 @@
 // Reference: http://karma-runner.github.io/0.12/config/configuration-file.html
 module.exports = function karmaConfig(config) {
   config.set({
-    frameworks: [
-      'mocha', 'chai', 'sinon', 'sinon-chai',
-    ],
+    frameworks: ['mocha'],
 
     reporters: [
       'nyan',
@@ -14,11 +12,10 @@ module.exports = function karmaConfig(config) {
     ],
 
     preprocessors: {
-      'tests/pw-pin-button.spec.js': ['webpack'],
+      'tests/pw-pin-button.spec.js': ['webpack', 'sourcemap'],
     },
 
     browsers: [
-      //'PhantomJS',
       'Chrome',
     ],
 
@@ -33,14 +30,11 @@ module.exports = function karmaConfig(config) {
     },
 
     plugins: [
-      require('karma-mocha'),
-      require('karma-chai'),
-      require('karma-sinon'),
-      require('karma-sinon-chai'),
-      require('karma-webpack'),
-      require('karma-nyan-reporter'),
-      //require('karma-phantomjs-launcher'),
-      require('karma-chrome-launcher'),
+      'karma-mocha',
+      'karma-sourcemap-loader',
+      'karma-chrome-launcher',
+      'karma-webpack',
+      'karma-nyan-reporter',
     ],
 
   });

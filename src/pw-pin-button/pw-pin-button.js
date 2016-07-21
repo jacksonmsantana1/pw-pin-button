@@ -119,12 +119,12 @@ class PwPinButton extends HTMLButtonElement {
     _this.visible = this[visible];
 
     // Updates the status attribute
-    _this.isPinned(pwUserInfo)
-      .then((isPin) => {
-        if (isPin) {
-          _this.status = 'checked';
-        }
-      });
+    //_this.isPinned(pwUserInfo)
+    //  .then((isPin) => {
+    //    if (isPin) {
+    //      _this.status = 'checked';
+    //    }
+    //  });
 
     whenClicked(_this).subscribe((elem) => {
       if (_this.status === 'checked') {

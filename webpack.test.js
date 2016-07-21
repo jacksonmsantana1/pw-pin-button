@@ -19,11 +19,17 @@ module.exports = {
         test: [/\.es6$/, /\.js$/],
         exclude: /node_modules/,
         loader: 'babel-loader',
-      },
+      }, 
+    ],
+    noParse: [
+      /node_modules\/sinon\//,
     ],
   },
   plugins: [],
   resolve: {
+    alias: {
+      sinon: 'sinon/pkg/sinon'
+    },
     extensions: ['', '.js', '.es6'],
   },
 };
