@@ -68,7 +68,7 @@ class PwPinButton extends HTMLButtonElement {
   /*********************Inherited Methods****************************/
 
   /*
-   * Initial function called when the component is created
+   * Initial function called when the pwPinButton is created
    */
   createdCallback() {
 
@@ -96,7 +96,7 @@ class PwPinButton extends HTMLButtonElement {
   }
 
   /*
-   * Function called when the component is attached to the DOM
+   * Function called when the pwPinButton is attached to the DOM
    */
   attachedCallback() {
 
@@ -138,7 +138,7 @@ class PwPinButton extends HTMLButtonElement {
   }
 
   /*
-   * Function called when some attribute from the component is changed
+   * Function called when some attribute from the pwPinButton is changed
    */
   /*eslint no-unused-vars: 0*/
   attributeChangedCallback(attrName, oldValue, newValue) {
@@ -154,14 +154,14 @@ class PwPinButton extends HTMLButtonElement {
   /*****************************Toggles*******************************/
 
   /**
-   * This function toggles the component attribute visible
+   * This function toggles the pwPinButton attribute visible
    */
   toggleVisible() {
     toggleAttr(_this, 'visible', VISIBLE_ATTR);
   }
 
   /**
-   * This function toggles the component attribute status
+   * This function toggles the pwPinButton attribute status
    */
   toggleStatus() {
     toggleAttr(_this, 'status', STATUS_ATTR);
@@ -247,7 +247,7 @@ class PwPinButton extends HTMLButtonElement {
   }
 
   /**
-   * Check the component status
+   * Check the pwPinButton status
    */
   isPinned(_pwUserInfo) {
     const pId = _this.projectId;
