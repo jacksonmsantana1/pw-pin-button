@@ -1,12 +1,44 @@
 import R from 'ramda';
+import Either from 'data.either';
 
 const map = R.map;
+const isNil = R.isNil;
 
 /**
  * TypeSafety
  * @constructor
  */
 const TypeSafety = function TypeSafety() {};
+
+/**
+ * Return an Either.Left if value is null
+ * otherwise return an Either.Right(a)
+ * @param a
+ */
+TypeSafety.prototype.nil = function nil(a) {
+  if (isNil(a)) {
+    return Either.Left('Null value');
+  }
+
+  return Either.Right(a);
+};
+
+TypeSafety.nil = TypeSafety.prototype.nil;
+
+/**
+ * Return an Either.Left if value is undefined
+ * otherwise return an Either.Right(a)
+ * @param a
+ */
+TypeSafety.prototype.undef = function undef(a) {
+  if (a === void 0) {
+    return Either.Left('Undefined value');
+  }
+
+  return Either.Right(a);
+};
+
+TypeSafety.undef = TypeSafety.prototype.undef;
 
 /**
  * typeOf
@@ -47,6 +79,24 @@ TypeSafety.prototype.objectTypeOf = function objectTypeOf(name) {
 };
 
 TypeSafety.objectTypeOf = TypeSafety.prototype.objectTypeOf;
+
+/**
+ * a -> Either(Array, String)
+ * @param arr
+ */
+TypeSafety.prototype.arrTypeOf = function arrTypeOf(arr) {
+  if (Object.prototype.toString.call(arr) === '[object Array]') {
+    return Either.Right(arr);
+  } else if (isNil(arr)) {
+    return Either.Left('Null value');
+  } else if (arr === void 0) {
+    return Either.Left('Undefined value');
+  }
+
+  return Either.Left('Error: Array expected, something else given.');
+};
+
+TypeSafety.arrTypeOf = TypeSafety.prototype.arrTypeOf;
 
 //Objects Types
 TypeSafety.obj = TypeSafety.objectTypeOf('Object');

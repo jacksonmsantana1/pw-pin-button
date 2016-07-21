@@ -51,6 +51,8 @@ const projectId = Symbol('projectId');
 const visible = Symbol('visible');
 const status = Symbol('status');
 
+const throwError = (msn) => { throw new Error(msn); };
+
 // getDivLike :: PwPinButton -> Maybe(HTMLDivElement)
 const getDivLike = compose(chain(second), chain(getChildNodes),
   chain(head), chain(getChildNodes),
@@ -105,13 +107,22 @@ class PwPinButton extends HTMLButtonElement {
     // checkElement :: HTMLElement -> IO(_)
     const checkElement = (elem) => (IO.of(_this.toggleStatus()));
 
+    // updateElement :: _ -> Promise
+    //const updateElement = () => pwUserInfo.map(_this.isPinned)
+    //  .orElse(throwError('PwUserInfo Component not found'));
+
+    // setStatus :: String -> IO
+    //const setStatus = IO.of(HTMLFunctional.setAttr(_this, 'checked'));
+
     // whenClicked :: HTMLElement -> ClickStreamEvent
     const whenClicked = compose(map(checkElement), map(get('target')), eventClick);
 
     /*********************Impure Functions**********************/
 
-    // Setting Components
+    // pwProjectInfo :: Either(PwProjectInfo, Error)
     pwProjectInfo = getPwProjectInfo(_this.projectId).runIO();
+
+    // pwUserInfo :: Either(PwUserInfo, Error)
     pwUserInfo = getPwUserInfo.runIO();
 
     // Setting attributes
@@ -119,12 +130,12 @@ class PwPinButton extends HTMLButtonElement {
     _this.visible = this[visible];
 
     // Updates the status attribute
-    //_this.isPinned(pwUserInfo)
-    //  .then((isPin) => {
-    //    if (isPin) {
-    //      _this.status = 'checked';
-    //    }
-    //  });
+    //updateElement
+    //  .then(R.cond([
+    //    [R.equal(true), setStatus('checked')],
+    //    [R.equal(false), setStatus('not-checked')],
+    //  ]))
+    //  .runIO();
 
     whenClicked(_this).subscribe((elem) => {
       if (_this.status === 'checked') {
@@ -262,7 +273,7 @@ class PwPinButton extends HTMLButtonElement {
 
       _pwUserInfo.isPinned(pId)
         .then(resolve)
-        .catch(reject);
+        .catch((err) => throwError(err.message));
     });
   }
 

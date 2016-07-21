@@ -7,6 +7,16 @@ var sinon = require('sinon');
 describe('Attributes => ', () => {
     let pwPinButton;
 
+    before(() => {
+      document.registerElement('pw-project-info', {
+        prototype: Object.create(HTMLElement.prototype)
+      });
+
+      document.registerElement('pw-user-info', {
+        prototype: Object.create(HTMLElement.prototype)
+      });
+    });
+
     beforeEach(() => {
       pwPinButton = document.createElement('pw-pin-button');
       document.body.appendChild(pwPinButton);
@@ -45,16 +55,6 @@ describe('When the pwPinButton is liked it ', () => {
 
     let spy;
     let event;
-
-    before(() => {
-      document.registerElement('pw-project-info', {
-        prototype: Object.create(HTMLElement.prototype)
-      });
-
-      document.registerElement('pw-user-info', {
-        prototype: Object.create(HTMLElement.prototype)
-      });
-    });
 
     beforeEach(() => {
       pwUserInfo = document.createElement('pw-user-info');
@@ -258,5 +258,44 @@ describe('When the pwPinButton is disliked it ', () => {
 
     pwPinButton.toggleStatus();
     pwPinButton.dispatchEvent(event);
+  });
+});
+
+describe('When the component is initialized it', () => {
+  //TODO
+  let pwPinButton;
+  let pwUserInfo;
+
+  let spyPwUserInfo;
+  let spyPwPinButton;
+
+  beforeEach(() => {
+    pwUserInfo = document.createElement('pw-user-info');
+    pwUserInfo.isPinned = () => Promise.resolve(true);
+    pwPinButton = document.createElement('pw-pin-button');
+
+    spyPwPinButton = sinon.spy(pwPinButton, 'isPinned');
+    spyPwUserInfo = sinon.spy(pwUserInfo, 'isPinned');
+
+    document.body.appendChild(pwUserInfo);
+    document.body.appendChild(pwPinButton);
+  });
+
+  afterEach(() => {
+    sinon.restore();
+    document.body.removeChild(pwPinButton);
+    document.body.removeChild(pwUserInfo);
+  });
+
+  it('Should call the isPinned() method', () => {
+    //expect(spyPwPinButton.called).to.be.equal(true);
+  });
+
+  it('Should call the pw-user-info isPinned() method', () => {
+    //expect(spyPwUserInfo.called).to.be.equal(true);
+  });
+
+  it('Should set the status attr to checked', () => {
+    //expect(pwPinButton.status).to.be.equal('checked');
   });
 });
