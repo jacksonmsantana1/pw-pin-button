@@ -1,9 +1,9 @@
 {
   "name": "pw-pin-button",
-  "version": "v0.0.1-semantically-released",
   "description": "Component Button called pw-pin-button",
   "main": "app.js",
-  "scripts": {
+  "scripts": {  
+    "commit": "git-cz",
     "eslint": "eslint ./src --ext .js",
     "jscs": "jscs ./src",
     "lint": "npm run eslint && npm run jscs",
@@ -68,9 +68,13 @@
     "typesafety": "0.0.5",
     "webcomponents.js": "^0.7.22"
   },
-   "config": {
+  "config": {
     "commitzen": {
       "path": "node_modules/cz-conventional-changelog"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacksonmsantana1/pw-pin-button.git"
   }
 }
