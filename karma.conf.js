@@ -1,5 +1,10 @@
 // Reference: http://karma-runner.github.io/0.12/config/configuration-file.html
 module.exports = function karmaConfig(config) {
+
+  if (process.env.TRAVIS) {
+    config.browsers = ['Chrome_travis_ci'];
+  }
+
   config.set({
     frameworks: ['mocha'],
 
@@ -18,6 +23,13 @@ module.exports = function karmaConfig(config) {
     browsers: [
       'Chrome',
     ],
+
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox'],
+      },
+    },
 
     singleRun: true,
 
