@@ -3,10 +3,10 @@
  */
 
 import R from 'ramda';
-import IO from '../lib/IO/IO';
 import Maybe from 'data.maybe';
 import Either from 'data.either';
 import TypeSafety from 'typesafety';
+import IO from '../lib/IO/IO';
 import Helpers from '../lib/Helpers/Helpers';
 import ClassList from '../lib/ClassList/ClassList';
 import HTMLFunctional from '../lib/HTMLFunctional/HTMLFunctional';

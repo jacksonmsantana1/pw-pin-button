@@ -4,7 +4,7 @@
     "browser": true,
     "es6": true
   },
-  "extends": "airbnb",
+  "extends": "airbnb-base",
   "globals": {
     "describe": true,
     "it": false

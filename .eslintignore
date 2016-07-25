@@ -4,6 +4,7 @@
 
 
 # Ignore built files except build/index.js
+src/lib/
 build/
 public/
 tests/
