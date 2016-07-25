@@ -57,6 +57,7 @@
     "debug": "^2.2.0",
     "ramda": "^0.21.0",
     "rx": "^4.1.0",
+    "typesafety": "0.0.5",
     "webcomponents.js": "^0.7.22"
   }
 }
