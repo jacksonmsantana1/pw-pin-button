@@ -49,6 +49,12 @@ module.exports = function karmaConfig(config) {
       'karma-nyan-reporter',
     ],
 
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox'],
+      },
+    },
   });
 };
 
