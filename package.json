@@ -2,7 +2,7 @@
   "name": "pw-pin-button",
   "description": "Component Button called pw-pin-button",
   "main": "app.js",
-  "scripts": {  
+  "scripts": {
     "commit": "git-cz",
     "eslint": "eslint ./src --ext .js",
     "jscs": "jscs ./src",
@@ -63,6 +63,7 @@
     "data.either": "^1.4.0",
     "data.maybe": "^1.2.2",
     "debug": "^2.2.0",
+    "glob": "^7.0.5",
     "ramda": "^0.21.0",
     "rx": "^4.1.0",
     "typesafety": "0.0.5",
