@@ -5,7 +5,7 @@ module.exports = {
   context: path.resolve('src'),
   entry: {
     app: './app',
-    vendor: ['webcomponents.js', 'typesafety', 'rx', 'data.either', 'data.maybe', 'ramda', 'debug'],
+    vendor: ['webcomponents.js', 'io-monad', 'typesafety', 'rx', 'data.either', 'data.maybe', 'ramda', 'debug'],
   },
   output: {
     path: path.resolve('build/js/'),

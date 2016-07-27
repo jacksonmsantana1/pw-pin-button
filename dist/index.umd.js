@@ -78,9 +78,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _typesafety2 = _interopRequireDefault(_typesafety);
 	
-	var _IO = __webpack_require__(7);
+	var _ioMonad = __webpack_require__(7);
 	
-	var _IO2 = _interopRequireDefault(_IO);
+	var _ioMonad2 = _interopRequireDefault(_ioMonad);
 	
 	var _Helpers = __webpack_require__(8);
 	
@@ -194,7 +194,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      /********************Impure Functions*********************/
 	
-	      var impure = _IO2.default.of(_this).map(createShadowDom).map(setInnerHTML(templateStyle));
+	      var impure = _ioMonad2.default.of(_this).map(createShadowDom).map(setInnerHTML(templateStyle));
 	
 	      impure.runIO();
 	    }
@@ -211,7 +211,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      // checkElement :: HTMLElement -> IO(_)
 	      var checkElement = function checkElement(elem) {
-	        return _IO2.default.of(_this.toggleStatus());
+	        return _ioMonad2.default.of(_this.toggleStatus());
 	      };
 	
 	      // updateElement :: _ -> Promise
@@ -333,10 +333,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return new Error('pwUserInfo argument is from an invalid class');
 	      }
 	
-	      var evt1 = compose(_IO2.default.of, emitCustomEvent(_pwProjectInfo), createCustomEvent('pin', { projectId: _this.projectId }));
+	      var evt1 = compose(_ioMonad2.default.of, emitCustomEvent(_pwProjectInfo), createCustomEvent('pin', { projectId: _this.projectId }));
 	      events.push(evt1(false, true));
 	
-	      var evt2 = compose(_IO2.default.of, emitCustomEvent(_pwUserInfo), createCustomEvent('pin', { projectId: _this.projectId }));
+	      var evt2 = compose(_ioMonad2.default.of, emitCustomEvent(_pwUserInfo), createCustomEvent('pin', { projectId: _this.projectId }));
 	      events.push(evt2(false, true));
 	
 	      return events;
@@ -369,10 +369,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return new Error('pwUserInfo argument is from an invalid class');
 	      }
 	
-	      var evt1 = compose(_IO2.default.of, emitCustomEvent(_pwProjectInfo), createCustomEvent('despin', { projectId: _this.projectId }));
+	      var evt1 = compose(_ioMonad2.default.of, emitCustomEvent(_pwProjectInfo), createCustomEvent('despin', { projectId: _this.projectId }));
 	      events.push(evt1(false, true));
 	
-	      var evt2 = compose(_IO2.default.of, emitCustomEvent(_pwUserInfo), createCustomEvent('despin', { projectId: _this.projectId }));
+	      var evt2 = compose(_ioMonad2.default.of, emitCustomEvent(_pwUserInfo), createCustomEvent('despin', { projectId: _this.projectId }));
 	      events.push(evt2(false, true));
 	
 	      return events;
@@ -10436,7 +10436,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function chain(fn) {
 	      /*eslint no-underscore-dangle:0*/
 	      var _this = this;
-	      return new IO(function io() {
+	      return new IO(function () {
+	        /*eslint prefer-spread:0 prefer-rest-params:0*/
 	        var next = fn(_this.effect.apply(_this, arguments));
 	        return next.effect.apply(next, arguments);
 	      });
@@ -10453,15 +10454,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'runIO',
 	    value: function runIO() {
+	      /*eslint prefer-spread:0 prefer-rest-params:0*/
 	      return this.effect.apply(this, arguments);
 	    }
 	  }, {
 	    key: 'join',
 	    value: function join() {
+	      /*eslint prefer-spread:0 prefer-rest-params:0*/
 	      return this.effect.apply(this, arguments);
 	    }
-	    /*eslint-disable prefer-rest-params */
-	
 	  }, {
 	    key: 'toString',
 	    value: function toString() {
@@ -10474,12 +10475,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return fn;
 	      });
 	    }
-	
-	    /*eslint-disable prefer-rest-params */
-	
 	  }, {
 	    key: 'runIO',
 	    value: function runIO(io) {
+	      /*eslint prefer-spread:0 prefer-rest-params:0*/
 	      return io.runIO.apply(io, [].slice.call(arguments, 1));
 	    }
 	  }, {
@@ -10493,6 +10492,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}();
 	
 	exports.default = IO;
+	
+	//# sourceMappingURL=index.js.map
 
 /***/ },
 /* 8 */
@@ -23308,17 +23309,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ramda2 = _interopRequireDefault(_ramda);
 	
-	var _Helpers = __webpack_require__(8);
+	var _ioMonad = __webpack_require__(7);
 	
-	var _Helpers2 = _interopRequireDefault(_Helpers);
-	
-	var _IO = __webpack_require__(7);
-	
-	var _IO2 = _interopRequireDefault(_IO);
+	var _ioMonad2 = _interopRequireDefault(_ioMonad);
 	
 	var _data = __webpack_require__(2);
 	
 	var _data2 = _interopRequireDefault(_data);
+	
+	var _Helpers = __webpack_require__(8);
+	
+	var _Helpers2 = _interopRequireDefault(_Helpers);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23362,7 +23363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/*****************************Getters********************************/
 	
 	// getDOM :: _ -> IO(Document)
-	var getDOM = _IO2.default.of(window.document);
+	var getDOM = _ioMonad2.default.of(window.document);
 	
 	// getElementsByTagName :: String -> IO([HTMLElement])
 	var getElementsByTagName = function getElementsByTagName(tag) {
@@ -23410,7 +23411,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	//toggleStyle :: String -> DOMTokenList -> IO
 	var toggleStyle = curry(function (styleAttr, classList) {
-	  return new _IO2.default(function () {
+	  return new _ioMonad2.default(function () {
 	    classList.toggle(styleAttr);
 	  });
 	});

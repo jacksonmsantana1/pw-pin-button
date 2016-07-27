@@ -1,7 +1,7 @@
 import R from 'ramda';
-import Helpers from '../Helpers/Helpers';
-import IO from '../IO/IO';
+import IO from 'io-monad';
 import Maybe from 'data.maybe';
+import Helpers from '../Helpers/Helpers';
 
 /******************************Helpers*******************************/
 

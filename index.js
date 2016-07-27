@@ -22,9 +22,9 @@ var _typesafety = require('typesafety');
 
 var _typesafety2 = _interopRequireDefault(_typesafety);
 
-var _IO = require('../lib/IO/IO');
+var _ioMonad = require('io-monad');
 
-var _IO2 = _interopRequireDefault(_IO);
+var _ioMonad2 = _interopRequireDefault(_ioMonad);
 
 var _Helpers = require('../lib/Helpers/Helpers');
 
@@ -138,7 +138,7 @@ var PwPinButton = function (_HTMLButtonElement) {
 
       /********************Impure Functions*********************/
 
-      var impure = _IO2.default.of(_this).map(createShadowDom).map(setInnerHTML(templateStyle));
+      var impure = _ioMonad2.default.of(_this).map(createShadowDom).map(setInnerHTML(templateStyle));
 
       impure.runIO();
     }
@@ -155,7 +155,7 @@ var PwPinButton = function (_HTMLButtonElement) {
 
       // checkElement :: HTMLElement -> IO(_)
       var checkElement = function checkElement(elem) {
-        return _IO2.default.of(_this.toggleStatus());
+        return _ioMonad2.default.of(_this.toggleStatus());
       };
 
       // updateElement :: _ -> Promise
@@ -277,10 +277,10 @@ var PwPinButton = function (_HTMLButtonElement) {
         return new Error('pwUserInfo argument is from an invalid class');
       }
 
-      var evt1 = compose(_IO2.default.of, emitCustomEvent(_pwProjectInfo), createCustomEvent('pin', { projectId: _this.projectId }));
+      var evt1 = compose(_ioMonad2.default.of, emitCustomEvent(_pwProjectInfo), createCustomEvent('pin', { projectId: _this.projectId }));
       events.push(evt1(false, true));
 
-      var evt2 = compose(_IO2.default.of, emitCustomEvent(_pwUserInfo), createCustomEvent('pin', { projectId: _this.projectId }));
+      var evt2 = compose(_ioMonad2.default.of, emitCustomEvent(_pwUserInfo), createCustomEvent('pin', { projectId: _this.projectId }));
       events.push(evt2(false, true));
 
       return events;
@@ -313,10 +313,10 @@ var PwPinButton = function (_HTMLButtonElement) {
         return new Error('pwUserInfo argument is from an invalid class');
       }
 
-      var evt1 = compose(_IO2.default.of, emitCustomEvent(_pwProjectInfo), createCustomEvent('despin', { projectId: _this.projectId }));
+      var evt1 = compose(_ioMonad2.default.of, emitCustomEvent(_pwProjectInfo), createCustomEvent('despin', { projectId: _this.projectId }));
       events.push(evt1(false, true));
 
-      var evt2 = compose(_IO2.default.of, emitCustomEvent(_pwUserInfo), createCustomEvent('despin', { projectId: _this.projectId }));
+      var evt2 = compose(_ioMonad2.default.of, emitCustomEvent(_pwUserInfo), createCustomEvent('despin', { projectId: _this.projectId }));
       events.push(evt2(false, true));
 
       return events;
