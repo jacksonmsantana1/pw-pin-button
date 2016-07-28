@@ -7,9 +7,9 @@ import Maybe from 'data.maybe';
 import Either from 'data.either';
 import TypeSafety from 'typesafety';
 import IO from 'io-monad';
-import Helpers from '../lib/Helpers/Helpers';
-import ClassList from '../lib/ClassList/ClassList';
-import HTMLFunctional from '../lib/HTMLFunctional/HTMLFunctional';
+import Helpers from 'helpers-patchwork';
+import ClassList from 'css-class-list';
+import HTMLFunctional from 'html-functional';
 
 /**************************Helpers****************************/
 

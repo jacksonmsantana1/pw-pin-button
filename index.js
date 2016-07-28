@@ -26,17 +26,17 @@ var _ioMonad = require('io-monad');
 
 var _ioMonad2 = _interopRequireDefault(_ioMonad);
 
-var _Helpers = require('../lib/Helpers/Helpers');
+var _helpersPatchwork = require('helpers-patchwork');
 
-var _Helpers2 = _interopRequireDefault(_Helpers);
+var _helpersPatchwork2 = _interopRequireDefault(_helpersPatchwork);
 
-var _ClassList = require('../lib/ClassList/ClassList');
+var _cssClassList = require('css-class-list');
 
-var _ClassList2 = _interopRequireDefault(_ClassList);
+var _cssClassList2 = _interopRequireDefault(_cssClassList);
 
-var _HTMLFunctional = require('../lib/HTMLFunctional/HTMLFunctional');
+var _htmlFunctional = require('html-functional');
 
-var _HTMLFunctional2 = _interopRequireDefault(_HTMLFunctional);
+var _htmlFunctional2 = _interopRequireDefault(_htmlFunctional);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61,23 +61,23 @@ var contain = _ramda2.default.contains;
 var str = _typesafety2.default.str;
 
 // Helpers
-var map = _Helpers2.default.map;
-var chain = _Helpers2.default.chain;
-var eventClick = _Helpers2.default.eventClick;
-var head = _Helpers2.default.head;
-var second = _Helpers2.default.second;
-var emitCustomEvent = _Helpers2.default.emitCustomEvent;
-var createCustomEvent = _Helpers2.default.createCustomEvent;
+var map = _helpersPatchwork2.default.map;
+var chain = _helpersPatchwork2.default.chain;
+var eventClick = _helpersPatchwork2.default.eventClick;
+var head = _helpersPatchwork2.default.head;
+var second = _helpersPatchwork2.default.second;
+var emitCustomEvent = _helpersPatchwork2.default.emitCustomEvent;
+var createCustomEvent = _helpersPatchwork2.default.createCustomEvent;
 
 // HTMLFunctional
-var toggleAttr = _HTMLFunctional2.default.toggleAttr;
-var toggleStyle = _HTMLFunctional2.default.toggleStyle;
-var getShadowRoot = _HTMLFunctional2.default.getShadowRoot;
-var getChildNodes = _HTMLFunctional2.default.getChildNodes;
-var setInnerHTML = _HTMLFunctional2.default.setInnerHTML;
-var createShadowDom = _HTMLFunctional2.default.createShadowDom;
-var getPwProjectInfo = _HTMLFunctional2.default.getPwProjectInfo;
-var getPwUserInfo = _HTMLFunctional2.default.getPwUserInfo;
+var toggleAttr = _htmlFunctional2.default.toggleAttr;
+var toggleStyle = _htmlFunctional2.default.toggleStyle;
+var getShadowRoot = _htmlFunctional2.default.getShadowRoot;
+var getChildNodes = _htmlFunctional2.default.getChildNodes;
+var setInnerHTML = _htmlFunctional2.default.setInnerHTML;
+var createShadowDom = _htmlFunctional2.default.createShadowDom;
+var getPwProjectInfo = _htmlFunctional2.default.getPwProjectInfo;
+var getPwUserInfo = _htmlFunctional2.default.getPwUserInfo;
 
 /*********************************Class Helpers*******************************/
 
@@ -96,7 +96,7 @@ var throwError = function throwError(msn) {
 var getDivLike = compose(chain(second), chain(getChildNodes), chain(head), chain(getChildNodes), chain(getShadowRoot), _data2.default.fromNullable);
 
 // toggleActive :: HTMLElement -> Maybe(IO)
-var _toggleActive = compose(map(toggleStyle('active')), map(_ClassList2.default), getDivLike);
+var _toggleActive = compose(map(toggleStyle('active')), map(_cssClassList2.default), getDivLike);
 
 var _this = void 0;
 var pwUserInfo = void 0;

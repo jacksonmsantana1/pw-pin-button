@@ -60,10 +60,13 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
+    "css-class-list": "0.0.1",
     "data.either": "^1.4.0",
     "data.maybe": "^1.2.2",
     "debug": "^2.2.0",
     "glob": "^7.0.5",
+    "helpers-patchwork": "0.0.3",
+    "html-functional": "0.0.1",
     "io-monad": "0.0.3",
     "ramda": "^0.21.0",
     "rx": "^4.1.0",
