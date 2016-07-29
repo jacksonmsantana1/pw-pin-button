@@ -1,3 +1,4 @@
+// jscs:disable
 /**
  * A Component like a Pinterest 'Pin' button
  */
@@ -10,6 +11,7 @@ import IO from 'io-monad';
 import Helpers from 'helpers-patchwork';
 import ClassList from 'css-class-list';
 import HTMLFunctional from 'html-functional';
+// jscs:disable
 
 /**************************Helpers****************************/
 
@@ -19,13 +21,13 @@ const get = R.prop;
 const isNil = R.isNil;
 const isEmpty = R.isEmpty;
 const contain = R.contains;
+const map = R.map;
+const chain = R.chain;
 
 // TypeSafety
 const str = TypeSafety.str;
 
 // Helpers
-const map = Helpers.map;
-const chain = Helpers.chain;
 const eventClick = Helpers.eventClick;
 const head = Helpers.head;
 const second = Helpers.second;
@@ -102,23 +104,6 @@ class PwPinButton extends HTMLButtonElement {
    */
   attachedCallback() {
 
-    /********************Pure Functions*********************/
-
-    // checkElement :: HTMLElement -> IO(_)
-    const checkElement = (elem) => (IO.of(_this.toggleStatus()));
-
-    // updateElement :: _ -> Promise
-    //const updateElement = () => pwUserInfo.map(_this.isPinned)
-    //  .orElse(throwError('PwUserInfo Component not found'));
-
-    // setStatus :: String -> IO
-    //const setStatus = IO.of(HTMLFunctional.setAttr(_this, 'checked'));
-
-    // whenClicked :: HTMLElement -> ClickStreamEvent
-    const whenClicked = compose(map(checkElement), map(get('target')), eventClick);
-
-    /*********************Impure Functions**********************/
-
     // pwProjectInfo :: Either(PwProjectInfo, Error)
     pwProjectInfo = getPwProjectInfo(_this.projectId).runIO();
 
@@ -129,23 +114,43 @@ class PwPinButton extends HTMLButtonElement {
     _this.projectId = this[projectId];
     _this.visible = this[visible];
 
-    // Updates the status attribute
-    //updateElement
-    //  .then(R.cond([
-    //    [R.equal(true), setStatus('checked')],
-    //    [R.equal(false), setStatus('not-checked')],
-    //  ]))
-    //  .runIO();
+    /********************Pure Functions*********************/
 
-    whenClicked(_this).subscribe((elem) => {
+    // toggleStatus :: HTMLElement -> IO
+    const toggleStatus = (elem) => (IO.of(_this.toggleStatus()));
+
+    // setStatus :: String -> IO
+    const setStatus = HTMLFunctional.setAttr(_this, 'status');
+
+    // checkElement :: Boolean -> _
+    const checkElement = (isChecked) => R.cond([
+      [R.equals(true, isChecked), setStatus('checked').runIO()], //IO
+      [R.equals(false, isChecked), setStatus('not-checked').runIO()], //IO
+    ]);
+
+    // pinOrDespin :: IO -> _
+    const pinOrDespin = (impure) => {
       if (_this.status === 'checked') {
         _this.pin(pwProjectInfo.get(), pwUserInfo.get());
       } else {
         _this.despin(pwProjectInfo.get(), pwUserInfo.get());
       }
 
-      elem.runIO();
-    });
+      impure.runIO(); //IO
+    };
+
+    // onInit :: Either(PwUserInfo) -> Promise(Boolean, Error)
+    const onInit = (_pwUserInfo) => _this.isPinned(_pwUserInfo.get());
+
+    // onClick :: HTMLElement -> ClickStreamEvent
+    const onClick = compose(map(toggleStatus), map(get('target')), eventClick);
+
+    /*********************Impure Functions**********************/
+
+    // Updates the status attribute
+    onInit(pwUserInfo).then(checkElement);
+
+    onClick(_this).subscribe(pinOrDespin);
   }
 
   /*

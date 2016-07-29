@@ -6,6 +6,7 @@ var sinon = require('sinon');
 
 describe('Attributes => ', () => {
     let pwPinButton;
+    let pwUserInfo;
 
     before(() => {
       document.registerElement('pw-project-info', {
@@ -18,12 +19,17 @@ describe('Attributes => ', () => {
     });
 
     beforeEach(() => {
+      pwUserInfo = document.createElement('pw-user-info');
+      pwUserInfo.isPinned = () => Promise.resolve(true);
       pwPinButton = document.createElement('pw-pin-button');
+
+      document.body.appendChild(pwUserInfo);
       document.body.appendChild(pwPinButton);
     });
 
     afterEach(() => {
       document.body.removeChild(pwPinButton);
+      document.body.removeChild(pwUserInfo);
     });
 
     it('Component must be invisible when the attr visible=false', () => {
@@ -288,14 +294,17 @@ describe('When the component is initialized it', () => {
   });
 
   it('Should call the isPinned() method', () => {
-    //expect(spyPwPinButton.called).to.be.equal(true);
+    expect(spyPwPinButton.called).to.be.equal(true);
   });
 
   it('Should call the pw-user-info isPinned() method', () => {
-    //expect(spyPwUserInfo.called).to.be.equal(true);
+    expect(spyPwUserInfo.called).to.be.equal(true);
   });
 
-  it('Should set the status attr to checked', () => {
-    //expect(pwPinButton.status).to.be.equal('checked');
+  it('Should set the status attr to checked', (done) => {
+    setTimeout(() => {
+      expect(pwPinButton.status).to.be.equal('checked');
+      done();
+    }, 100);
   });
 });

@@ -5,7 +5,7 @@
   "scripts": {
     "commit": "git-cz",
     "eslint": "eslint ./src --ext .js",
-    "jscs": "jscs ./src",
+    "jscs": "jscs ./src/pw-pin-button/*.js",
     "lint": "npm run eslint && npm run jscs",
     "create-test": "webpack -p -bail --config webpack.test.js",
     "build-test": "node .bin/build-test",
